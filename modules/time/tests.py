@@ -1,10 +1,14 @@
 from modules.time import get, check
 
+test_message = [{"time" : 1424717809, "sender" : 91670994,
+        "chat-id" : 136, "id-of-message" : 198504,
+        "text" : "время"}]
+
 def tests():
     result = "Time: "
 
     # Test for "get"
-    isWorking = "Текущее время" in get.get()[0]
+    isWorking = "Текущее время" in get.get(test_message)[0]
     if isWorking:
         result += "Работоспособность - успешно, "
     else:
