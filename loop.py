@@ -17,7 +17,7 @@ def start_loop():
     last_message_id = response["items"][0]["id"]
 
     while True: #Infinity loop
-        message = get_vk_messages.get_message(vk, chat_id, last_message_id) #(VK object)
+        message = get_vk_messages.get_message(vk, chat_id, last_message_id, config["ignored-users"])
         if message:
             answer = parse_messages.parse(message)
             if answer:
