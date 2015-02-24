@@ -1,9 +1,9 @@
 import re
 
-time-vtk = re.compile('(время)+')
+time_vtk = re.compile('время|time')
 
 def check(message):
-    if time-vtk.match(message):
+    if time_vtk.match(message):
         return True
     else:
         return False
