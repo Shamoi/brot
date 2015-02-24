@@ -10,4 +10,5 @@ import parse_messages
 def start_loop():
     while True: #Infinity loop
         message = get_vk_messages.get_message() #(VK object)
-        out_vk_messages.send_messages(parse_messages.parse(message))
+        if message:
+            out_vk_messages.send_messages(parse_messages.parse(message))
