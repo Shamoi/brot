@@ -1,11 +1,11 @@
-from modules.time import tests #from each module taking tests
+from modules.time import tests as time_tests #from each module taking tests
 import vk_api
 import json
 import time #for generation nubmer (anti flood contro;)
 
 def doCommandsTests():
     results = ["Тестирование команд:"]
-    results.append(tests.tests())
+    results.append(time_tests.tests())
     return results
 
 def doMessagesTests():
