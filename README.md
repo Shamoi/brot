@@ -5,8 +5,8 @@ Yet another bot for VK messages
 `pip install vk_api requests`
 ### Create config file with:
 `{
-  "vk-login" : "79097156210",
-  "vk-password" : "Pkj,ysqCtdrf512"
+  "vk-login" : "login",
+  "vk-password" : "password"
 }`
 ### Run
 `python3 run.py`
