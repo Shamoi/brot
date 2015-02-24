@@ -1,5 +1,5 @@
-from modules.time import check, get as time #import each module
-
+import modules.time.check as time_check #import each module
+import modules.time.get as time_get
 def parse(message):
-    if time.check(message):
-        return time.get(messages)
+    if time_check.check(message[0]["text"]):
+        return time_get.get(message)

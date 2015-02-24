@@ -1,4 +1,4 @@
 import time
 
-def get():
+def get(message):
     return [time.strftime("Текущее время - %H:%M")]
