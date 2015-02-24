@@ -13,9 +13,9 @@ def tests():
     # Test for "check"
     isChecking = check.check("время") == True and check.check("бремя") == False
     if isChecking:
-        result += "Чекинг - успешно, "
+        result += "чекинг - успешно, "
     else:
-        result += "Чекинг - провалено, "
+        result += "чекинг - провалено, "
 
     result += "завершено."
     return result
