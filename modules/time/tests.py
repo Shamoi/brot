@@ -8,7 +8,7 @@ def tests():
     result = "Time: "
 
     # Test for "get"
-    isWorking = "Текущее время" in get.get(test_message)[0]
+    isWorking = "Текущее время" in get.get(test_message)["text"][0]
     if isWorking:
         result += "Работоспособность - успешно, "
     else:
