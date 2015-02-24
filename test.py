@@ -1,9 +1,11 @@
 from modules.time import tests #from each module taking tests
 
 def doTests():
-    #result = result of doing tests
-    #return result
-    pass
+    results = ["Тестирование"]
+    results.append(tests.tests())
+    return results
 
 if __name__ == '__main__':
-    print(doTests())
+    results = doTests()
+    for result in results:
+        print(result)
