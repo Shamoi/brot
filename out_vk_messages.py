@@ -1,3 +1,5 @@
+import time
+
 def send_messages(messages, vk, chat_id):
     for message in messages["text"]:
         response = vk.method('messages.send',
