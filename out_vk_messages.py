@@ -1,7 +1,7 @@
 def send_messages(messages, vk, chat_id):
     for message in messages["text"]:
         response = vk.method('messages.send',
-                              {"chat_id" : chat_id, "message" : "Бот: " + message})
+                              {"chat_id" : chat_id, "message" : message})
     try:
         for pic in messages["photo"]:
             response = vk.method('messages.send',
