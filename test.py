@@ -21,9 +21,19 @@ def doMessagesTests():
         results.append("Отправка сообщения - успешно")
     return results
 
-if __name__ == '__main__':
+def doTests():
+    results = []
+    results += doMessagesTests()
+    results += doCommandsTests()
+    return results
+
+def printTests():
     results = []
     results += doMessagesTests()
     results += doCommandsTests()
     for result in results:
         print(result)
+    return 0
+
+if __name__ == '__main__':
+    printTests()
