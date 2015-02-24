@@ -28,9 +28,7 @@ def doTests():
     return results
 
 def printTests():
-    results = []
-    results += doMessagesTests()
-    results += doCommandsTests()
+    results = doTests()
     for result in results:
         print(result)
     return 0
