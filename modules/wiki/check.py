@@ -8,9 +8,7 @@ def check(message):
     if wikipedia_message.match(message.lower()):
         try:
             wikipedia_is_in = wikipedia.summary(message.replace("?", "")[10:], sentences = 1)
-            print (message.replace("?", "")[10:])
         except wikipedia.exceptions.DisambiguationError as e:
-            print(e.options[0])
             return True
         except Exception as error:
             return False
