@@ -3,6 +3,7 @@ from modules.test import tests as test_tests
 from modules.staticcmds import tests as staticcmds_tests
 from modules.wiki import tests as wiki_tests
 from modules.when import tests as when_tests
+from modules.weather import tests as weather_tests
 import vk_api
 import json
 import time #for generation nubmer (anti flood control)
@@ -14,6 +15,7 @@ def doCommandsTests():
     results.append(staticcmds_tests.tests())
     results.append(wiki_tests.tests())
     results.append(when_tests.tests())
+    results.append(weather_tests.tests())
     return results
 
 def doMessagesTests():

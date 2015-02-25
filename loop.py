@@ -23,4 +23,3 @@ def start_loop():
             if answer:
                 out_vk_messages.send_messages(answer, vk, chat_id)
             last_message_id = message["id"]
-    time.sleep(0.5)

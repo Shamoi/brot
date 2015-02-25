@@ -13,6 +13,9 @@ import modules.wiki.get as wiki_get
 import modules.when.check as when_check
 import modules.when.get as when_get
 
+import modules.weather.check as weather_check
+import modules.weather.get as weather_get
+
 def parse(message):
     if time_check.check(message["text"]):
         return time_get.get(message)
@@ -20,6 +23,8 @@ def parse(message):
         return test_get.get(message)
     elif when_check.check(message["text"]):
         return when_get.get(message)
+    elif weather_check.check(message["text"]):
+        return weather_get.get(message)
     elif staticcmds_check.check(message["text"]):
         return staticcmds_get.get(message)
     elif wiki_check.check(message["text"]):

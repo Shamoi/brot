@@ -5,10 +5,10 @@ test_message = [{"time" : 1424717809, "sender" : 91670994,
         "text" : "время"}]
 
 def tests():
-    result = "Weather: "
+    result = "When: "
 
     # Test for "check"
-    isChecking = check.check("погода") == True and check.check("пагада") == False
+    isChecking = check.check("когда будет что-то") == True and check.check("никогда ничего не будет") == False
     if isChecking:
         result += "Чекинг - успешно, "
     else:
