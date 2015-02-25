@@ -8,7 +8,7 @@ def tests():
     result = "Staticcmds: "
 
     # Test for "get"
-    isWorking = "ответ" in get.get(test_message)["text"][0]
+    isWorking = "Ответ" in get.get(test_message)["text"][0]
     if isWorking:
         result += "Работоспособность - успешно, "
     else:
