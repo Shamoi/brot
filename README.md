@@ -5,8 +5,11 @@ Yet another bot for VK messages
 `pip install vk_api requests`
 ### Create config file with:
 `{
-  "vk-login" : "login",
-  "vk-password" : "password"
-}`
+  "vk-login" : "79687426344",
+  "vk-password" : "gbZTYznTk6iHDhvY81Xm",
+  "chat-id" : 1,
+  "ignored-users" : [1, 2]
+}
+`
 ### Run
 `python3 run.py`
