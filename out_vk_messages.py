@@ -11,3 +11,5 @@ def send_messages(messages, vk, chat_id):
                                 {"chat_id" : chat_id, "attachment" : pic})
     except KeyError:
         pass
+    except Exception:
+        pass

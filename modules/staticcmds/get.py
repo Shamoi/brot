@@ -14,5 +14,4 @@ def get(message):
         commands_adding_file.close()
         return {"text" : ["Готово, команда добавлена"], "photos" : []}
     else:
-        print (commands[message["text"].lower()]["photo"])
         return {"text" : [commands[message["text"].lower()]["text"]], "photos" : [commands[message["text"].lower()]["photo"]]}
