@@ -6,3 +6,4 @@ wiki-*.*
 *.jpg
 *.gif
 .DS_Store
+.idea
