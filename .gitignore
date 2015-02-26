@@ -5,3 +5,4 @@ commands.json
 wiki-*.*
 *.jpg
 *.gif
+.DS_Store
