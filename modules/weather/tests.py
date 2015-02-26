@@ -1,14 +1,14 @@
-from modules.when import get, check
+from modules.weather import get, check
 
 test_message = [{"time" : 1424717809, "sender" : 91670994,
         "chat-id" : 136, "id-of-message" : 198504,
         "text" : "время"}]
 
 def tests():
-    result = "When: "
+    result = "Weather: "
 
     # Test for "check"
-    isChecking = check.check("когда будет что-то") == True and check.check("никогда ничего не будет") == False
+    isChecking = check.check("погода") == True and check.check("пагада") == False
     if isChecking:
         result += "Чекинг - успешно, "
     else:

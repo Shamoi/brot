@@ -1,9 +1,9 @@
 import re
 
-weather_vtk = re.compile('погода')
+when_text = re.compile('когда .+')
 
 def check(message):
-    if weather_vtk.match(message.lower()):
+    if when_text.match(message.lower()):
         return True
     else:
         return False
