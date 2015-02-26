@@ -9,6 +9,9 @@ def get(message):
         message["text"] = "что такое " +  e.options[0]
     except wikipedia.exceptions.WikipediaException:
         pass
-    message["text"] = message["text"].replace("?", "")
-    return {"text" : [wikipedia.summary(message["text"][10:])],
-            "photos" : []}
+    try:
+        message["text"] = message["text"].replace("?", "")
+        return {"text" : [wikipedia.summary(message["text"][10:])],
+                "photos" : []}
+    except Exception as e:
+        return {"text" : ["Ошибочка: " + str(e)], "photos" : []}

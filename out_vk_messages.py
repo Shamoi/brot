@@ -4,12 +4,15 @@ def send_messages(messages, vk, chat_id, message_q):
 
     for message in messages["text"]:
         if message and (message != " "):
-            if message_q["chat_id"]:
-                response = vk.method('messages.send',
+            try:
+                if message_q["chat_id"]:
+                    response = vk.method('messages.send',
                                     {"chat_id" : message_q["chat_id"], "message" : message})
-            else:
-                response = vk.method('messages.send',
+                else:
+                    response = vk.method('messages.send',
                                      {"user_id" : message_q["sender"], "message" : message})
+            except Exception:
+                return 0
     try:
         for pic in messages["photos"]:
             if message_q["chat_id"]:
