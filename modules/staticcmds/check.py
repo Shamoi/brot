@@ -1,7 +1,7 @@
 import json
 import re
 
-add_command = re.compile('".+" *- *".+"') #Regular expression for adding command
+add_command = re.compile('".+" - ".+"') #Regular expression for adding command
 
 def check(message):
     commands = json.loads(open('modules/staticcmds/files/commands.json').read())
