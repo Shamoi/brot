@@ -22,6 +22,9 @@ import modules.mdk.get as mdk_get
 import modules.sur.check as sur_check
 import modules.sur.get as sur_get
 
+import modules.night.check as night_check
+import modules.night.get as night_get
+
 
 def parse(message):
     if time_check.check(message["text"]):
@@ -30,6 +33,8 @@ def parse(message):
         return test_get.get(message)
     elif mdk_check.check(message["text"]):
         return mdk_get.get(message)
+    elif night_check.check(message["text"]):
+        return night_get.get(message)
     elif sur_check.check(message["text"]):
         return sur_get.get(message)
     elif when_check.check(message["text"]):

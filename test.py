@@ -6,6 +6,7 @@ from modules.when import tests as when_tests
 from modules.weather import tests as weather_tests
 from modules.mdk import tests as mdk_tests
 from modules.sur import tests as sur_tests
+from modules.night import tests as night_tests
 import vk_api
 import json
 import time #for generation nubmer (anti flood control)
@@ -20,6 +21,7 @@ def doCommandsTests():
     results.append(weather_tests.tests())
     results.append(mdk_tests.tests())
     results.append(sur_tests.tests())
+    results.append(night_tests.tests())
     return results
 
 def doMessagesTests():
