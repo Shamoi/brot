@@ -16,11 +16,22 @@ import modules.when.get as when_get
 import modules.weather.check as weather_check
 import modules.weather.get as weather_get
 
+import modules.mdk.check as mdk_check
+import modules.mdk.get as mdk_get
+
+import modules.sur.check as sur_check
+import modules.sur.get as sur_get
+
+
 def parse(message):
     if time_check.check(message["text"]):
         return time_get.get(message)
     elif test_check.check(message["text"]):
         return test_get.get(message)
+    elif mdk_check.check(message["text"]):
+        return mdk_get.get(message)
+    elif sur_check.check(message["text"]):
+        return sur_get.get(message)
     elif when_check.check(message["text"]):
         return when_get.get(message)
     elif weather_check.check(message["text"]):

@@ -3,3 +3,5 @@ __pycache__
 vk_config.json
 commands.json
 wiki-*.*
+*.jpg
+*.gif

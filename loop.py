@@ -9,7 +9,6 @@ import json
 
 
 def start_loop():
-
     config = json.loads(open('config.json').read())
     vk = vk_api.VkApi(config["vk-login"], config["vk-password"])
     chat_id = config["chat-id"]
