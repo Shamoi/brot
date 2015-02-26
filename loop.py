@@ -12,7 +12,7 @@ def start_loop():
     config = json.loads(open('config.json').read())
     vk = vk_api.VkApi(config["vk-login"], config["vk-password"])
     chat_id = config["chat-id"]
-    response = vk.method('messages.getHistory', {"chat_id" : chat_id, "count" : 1}) #Take id of last message
+    response = vk.method('messages.get', {"count" : 1}) #Take id of last message
     last_message_id = response["items"][0]["id"]
 
     while True: #Infinity loop
@@ -20,5 +20,5 @@ def start_loop():
         if message:
             answer = parse_messages.parse(message)
             if answer:
-                out_vk_messages.send_messages(answer, vk, chat_id)
+                out_vk_messages.send_messages(answer, vk, chat_id, message)
             last_message_id = message["id"]

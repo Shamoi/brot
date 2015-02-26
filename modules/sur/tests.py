@@ -5,7 +5,7 @@ test_message = [{"time" : 1424717809, "sender" : 91670994,
         "text" : "время"}]
 
 def tests():
-    result = "MDK: "
+    result = "SUR: "
 
     # Test for "check"
     isChecking = check.check("мдк") == True and check.check("чтк") == False
