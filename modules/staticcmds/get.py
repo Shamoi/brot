@@ -1,7 +1,7 @@
 import json
 import re
 
-blocked = ["сева"]
+blocked = ["сева", "сева.", "!сева"]
 commands = json.loads(open('modules/staticcmds/files/commands.json').read())
 add_command = re.compile('".+" *- *".+"')
 
