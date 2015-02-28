@@ -19,7 +19,7 @@ def get(message):
         commands.update({question.lower() : {"text" : answer, "photo" : ""}})
         commands_adding_file.write(json.dumps(commands))
         commands_adding_file.close()
-        return {"text" : ["Готово, команда добавлена"], "photos" : []}
+        return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
     else:
         return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
                 "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
