@@ -7,10 +7,9 @@ add_command = re.compile('".+" *- *".+"')
 
 def get(message):
     if add_command.match(message["text"].lower()):
-        addCommand(message)
-        lru_cache.cache_clear()
+        return addCommand(message)
     else:
-        getCommand(message)
+        return getCommand(message)
 
 
 def addCommand(message):
