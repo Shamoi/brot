@@ -45,5 +45,5 @@ def parse(message):
         return staticcmds_get.get(message)
     elif wiki_check.check(message["text"]):
         return wiki_get.get(message)
-    else:
-        return {"text" : ["Я не могут ответить на это, мне нужно уточнить в офисе"], "photos" : []}
+    elif "бот" in message["text"].lower():
+        return {"text" : ["Я не могу ответить на это, мне нужно уточнить в офисе"], "photos" : []}
