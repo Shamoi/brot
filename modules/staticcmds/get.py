@@ -8,7 +8,7 @@ add_command = re.compile('".+" *- *".+"')
 def get(message):
     if add_command.match(message["text"].lower()):
         commands_adding_file = open('modules/staticcmds/files/commands.json', 'w')
-        question = message["text"].split('"')[1]
+        question = message["text"].split('"')[1].replace("?", "")
         answer = message["text"].split('"')[3]
 
         if question.lower() in blocked:
