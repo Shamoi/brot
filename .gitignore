@@ -6,3 +6,4 @@ wiki-*.*
 *.gif
 .DS_Store
 .idea
+commands.json
