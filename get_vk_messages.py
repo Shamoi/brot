@@ -6,15 +6,19 @@ def get_message(vk, chat_id, last_message_id, ignored_users):
         return None
 
     if response["items"]:
-        try:
+        if "chat_id" in response["items"][0]:
             message = {"time" : response["items"][0]["date"], "sender" : response["items"][0]["user_id"],
                        "chat_id" : response["items"][0]["chat_id"], "id" : response["items"][0]["id"],
                        "text" : response["items"][0]["body"]}
-        except KeyError:
+        else:
             message = {"time" : response["items"][0]["date"], "sender" : response["items"][0]["user_id"],
                        "chat_id" : "", "id" : response["items"][0]["id"], "text" : response["items"][0]["body"]}
+
+        
         if response["items"][0]["user_id"] in ignored_users: #Check, if sender are ignored - ignore message
             return None
+
+
         return message
     else:
         return None
