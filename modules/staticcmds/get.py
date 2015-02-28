@@ -22,4 +22,4 @@ def get(message):
         return {"text" : ["Готово, команда добавлена"], "photos" : []}
     else:
         return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
-                "photos" : [commands[message["text"].lower()replace("?", "")]["photo"]]}
+                "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
