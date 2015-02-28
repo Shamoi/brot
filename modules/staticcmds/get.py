@@ -16,10 +16,10 @@ def get(message):
             commands_adding_file.close()
             return {"text" : ["Команду нельзя изменять"], "photos" : []}
 
-        commands.update({question.lower() : {"text" : answer, "photo" : ""}})
+        commands.update({question.lower() : {"text" : answer, "photo" : message["attachment"]}})
         commands_adding_file.write(json.dumps(commands))
         commands_adding_file.close()
-        return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : [message["attachment"]]}
+        return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
     else:
         return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
                 "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
