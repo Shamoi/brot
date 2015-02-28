@@ -13,7 +13,7 @@ def get(message):
         getCommand(message)
 
 
-def addCommand():
+def addCommand(message):
     commands_adding_file = open('modules/staticcmds/files/commands.json', 'w')
     question = message["text"].split('"')[1].replace("?", "")
     answer = message["text"].split('"')[3]
@@ -28,6 +28,6 @@ def addCommand():
     commands_adding_file.close()
     return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
 
-def getCommand():
+def getCommand(message):
     return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
             "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
