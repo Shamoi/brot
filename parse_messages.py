@@ -46,4 +46,4 @@ def parse(message):
     elif wiki_check.check(message["text"]):
         return wiki_get.get(message)
     else:
-        return None
+        return {"text" : ["Увы, команда не распознана"], "photos" : []}
