@@ -1,5 +1,6 @@
 import json
 import re
+from functools import lru_cache
 
 blocked = ["сева", "сева.", "!сева"]
 commands = json.loads(open('modules/staticcmds/files/commands.json').read())
@@ -7,19 +8,28 @@ add_command = re.compile('".+" *- *".+"')
 
 def get(message):
     if add_command.match(message["text"].lower()):
-        commands_adding_file = open('modules/staticcmds/files/commands.json', 'w')
-        question = message["text"].split('"')[1].replace("?", "")
-        answer = message["text"].split('"')[3]
+        addCommand(message)
+        lru_cache.cache_clear()
+    else:
+        getCommand(message)
 
-        if question.lower() in blocked:
-            commands_adding_file.write(json.dumps(commands))
-            commands_adding_file.close()
-            return {"text" : ["Команду нельзя изменять"], "photos" : []}
 
-        commands.update({question.lower() : {"text" : answer, "photo" : message["attachment"]}})
+def addCommand():
+    commands_adding_file = open('modules/staticcmds/files/commands.json', 'w')
+    question = message["text"].split('"')[1].replace("?", "")
+    answer = message["text"].split('"')[3]
+
+    if question.lower() in blocked:
         commands_adding_file.write(json.dumps(commands))
         commands_adding_file.close()
-        return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
-    else:
-        return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
-                "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
+        return {"text" : ["Команду нельзя изменять"], "photos" : []}
+
+    commands.update({question.lower() : {"text" : answer, "photo" : message["attachment"]}})
+    commands_adding_file.write(json.dumps(commands))
+    commands_adding_file.close()
+    return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
+
+@lru_cache(maxsize=100)
+def getCommand():
+    return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
+            "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
