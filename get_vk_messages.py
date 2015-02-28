@@ -25,6 +25,8 @@ def get_message(vk, chat_id, last_message_id, ignored_users):
             elif "video" in response["items"][0]["attachments"][0]:
                 message.update({"attachment" : "audio" + str(response["items"][0]["attachments"][0]["video"]["owner_id"]) + "_"
                                 + str(response["items"][0]["attachments"][0]["video"]["id"])})
+        else:
+            message.update({"attachment" : ""})
 
         if response["items"][0]["user_id"] in ignored_users: #Check, if sender are ignored - ignore message
             return None
