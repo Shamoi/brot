@@ -1,6 +1,6 @@
 import json
 import re
-
+from functools import lru_cache
 blocked = ["сева", "сева.", "!сева"]
 commands = json.loads(open('modules/staticcmds/files/commands.json').read())
 add_command = re.compile('".+" *- *".+"')
@@ -28,5 +28,13 @@ def addCommand(message):
     return {"text" : ['Готово, команда "' + question + '" добавлена'], "photos" : []}
 
 def getCommand(message):
-    return {"text" : [commands[message["text"].lower().replace("?", "")]["text"]],
-            "photos" : [commands[message["text"].lower().replace("?", "")]["photo"]]}
+    return {"text" : [getText(message["text"])],
+            "photos" : [getPhoto(message["text"])]}
+
+@lru_cache(maxsize=32)
+def getText(message):
+    return commands[message.lower().replace("?", "")]["text"]
+    
+@lru_cache(maxsize=32)
+def getPhoto(message):
+    return commands[message.lower().replace("?", "")]["photo"]
