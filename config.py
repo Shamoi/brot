@@ -17,11 +17,11 @@ def create_config():
 
 
 def open_config():
-    """Function returns config-file"""
+    """Function returns config file"""
     try:
         config_file = open(config_path)
     except FileNotFoundError:
-        print('Config-file is not found.')
+        print('Config file is not found.')
         create_config()
         config_file = open(config_path)
     return config_file
