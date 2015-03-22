@@ -52,7 +52,7 @@ def get_message(last_message_id=0, specify_dialog=False,
             'sender_id': loaded_message['user_id'],
             'type': 'chat' if 'chat_id' in loaded_message else 'user',
             'chat': loaded_message['chat_id'] if 'chat_id' in loaded_message else None,
-            'body': loaded_message['body'],
+            'text': loaded_message['body'],
             'attachments': loaded_attachments
         }
         return message
