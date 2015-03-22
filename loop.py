@@ -29,19 +29,21 @@ def loop():
         message = get_message(
             last_message_id=last_message_id
         )
-        answer = parse_message(message)
-        send_message(message=answer['text'],
-                     attachments=answer['attachments'],
-                     type=message['type'],
-                     send_to=message['chat'] if message['type'] == 'chat'
-                     else message['sender_id']
-        )
+        if message is not None:
+            answer = parse_message(message)
+            send_message(message=answer['text'],
+                         attachments=answer['attachments'],
+                         type=message['type'],
+                         send_to=message['chat'] if message['type'] == 'chat'
+                         else message['sender_id']
+            )
 
 
 def parse_message(message):
-    for module in imported_modules:
-        if module['regexp'].match(message['text']):
-            return module['object'].get()
+    for parsing_module in imported_modules:
+        print(message['text'])
+        if imported_modules[parsing_module]['regexp'].match(message['text']):
+            return imported_modules[parsing_module]['object'].get()
 
 
 loop()  # Starting loop
