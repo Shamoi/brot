@@ -1,24 +1,54 @@
-import vk_api
+from vk_functions import get_message, send_message
+import re
 
-import get_vk_messages
-import out_vk_messages
-import parse_messages
+last_message_id = get_message()['id']
 
-import time
-import json
+modules = [
+    ('test', re.compile('!(тест|test)'))
+]
+
+imported_modules = {}
+for module in modules:
+    try:
+        imported_modules.update({
+            module[0]: {
+                'object': __import__(name=module[0]),
+                'regexp': module[1]
+            }
+        })
+    except ImportError as error:
+        print('Не удается импортировать модуль "{module}"'.format(
+            module=module[0]
+        ))
+        print(error)
+        continue
 
 
-def start_loop():
-    config = json.loads(open('config.json').read())
-    vk = vk_api.VkApi(config["vk-login"], config["vk-password"])
-    chat_id = config["chat-id"]
-    response = vk.method('messages.get', {"count" : 1}) #Take id of last message
-    last_message_id = response["items"][0]["id"]
+def loop():
+    global last_message_id
 
-    while True: #Infinity loop
-        message = get_vk_messages.get_message(vk, chat_id, last_message_id, config["ignored-users"])
-        if message:
-            answer = parse_messages.parse(message)
-            if answer:
-                out_vk_messages.send_messages(answer, vk, chat_id, message)
-            last_message_id = message["id"]
+    while True:
+        message = get_message(
+            last_message_id=last_message_id
+        )
+        if message is not None:
+            last_message_id = message['id']
+            answer = parse_message(message)
+            if answer is not None:
+                send_message(message=answer['text'],
+                             attachments=answer['attachments'],
+                             type=message['type'],
+                             send_to=message['chat'] if message['type'] == 'chat'
+                             else message['sender_id']
+                )
+
+
+def parse_message(message):
+    for parsing_module in imported_modules:
+        if imported_modules[parsing_module]['regexp'].match(message['text']):
+            return imported_modules[parsing_module]['object'].get(message)
+    else:
+        return None
+
+
+loop()  # Starting loop
