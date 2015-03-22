@@ -50,7 +50,7 @@ def get_message(last_message_id=0, specify_dialog=False,
         message = {
             'id': loaded_message['id'],
             'sender_id': loaded_message['user_id'],
-            'type': 'chat' if 'chat_id' in loaded_message else 'dialog',
+            'type': 'chat' if 'chat_id' in loaded_message else 'user',
             'chat': loaded_message['chat_id'] if 'chat_id' in loaded_message else None,
             'body': loaded_message['body'],
             'attachments': loaded_attachments
@@ -62,15 +62,26 @@ def get_message(last_message_id=0, specify_dialog=False,
 
 
 def send_message(message='Произошла ошибка. Код ошибки: 02.2.0',
-                 attachments=None):
+                 attachments=[], type='user', send_to=91670994):
     """ Отправляет сообщение и вложения к нему
 
 
     :param message: текст сообщения
     :param attachments: список вложений
+    :param type: тип получателя сообщения (user/chat)
+    :param send_to: id получателя сообщения
     :return: результат отправки сообщения
     """
-    return True
+    values = {
+        'message': message,
+        'attachments': ','.join(attachments)
+    }
+    if type == 'chat':
+        values.update({'chat_id': send_to})
+    else:
+        values.update({'user_id': send_to})
+    response = vk_method('messages.send', values)
+    return response
 
 
 def vk_method(method, values):
