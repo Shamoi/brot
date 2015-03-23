@@ -4,7 +4,7 @@ import re
 last_message_id = get_message()['id']
 
 modules = [
-    ('test', re.compile('!(тест|test)'))
+    ('test', '!(тест|test)')
 ]
 
 imported_modules = {}
@@ -13,7 +13,7 @@ for module in modules:
         imported_modules.update({
             module[0]: {
                 'object': __import__(name=module[0]),
-                'regexp': module[1]
+                'regexp': re.compile(module[1], re.IGNORECASE)
             }
         })
     except ImportError as error:
