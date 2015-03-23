@@ -11,7 +11,6 @@ def get(message):
         wiki_answer = wikipedia.summary(query, 5)
     except wikipedia.exceptions.DisambiguationError as error:
         wiki_answer = wikipedia.summary(error.options[0], 5)
-    except Exception as error:
-        print(error)
-        return {'text': "Произошла ошибка. Сообщите Севе.", 'attachments': []}
+    except wikipedia.PageError:
+        return {'text': "Я не знаю.", 'attachments': []}
     return {'text': wiki_answer, 'attachments': []}
