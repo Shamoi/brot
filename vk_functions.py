@@ -74,12 +74,13 @@ def send_message(message='Произошла ошибка. Код ошибки: 
     """
     values = {
         'message': message,
-        'attachments': ','.join(attachments)
+        'attachment': ','.join(attachments)
     }
     if type == 'chat':
         values.update({'chat_id': send_to})
     else:
         values.update({'user_id': send_to})
+
     response = vk_method('messages.send', values)
     return response
 
