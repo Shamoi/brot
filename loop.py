@@ -4,7 +4,8 @@ import re
 last_message_id = get_message()['id']
 
 modules = [
-    ('test', '!(тест|test)')
+    ('test', '!(тест|test)'),
+    ('like', 'лайк(ни)? (мне|на)? (аву|фотографию|аватарку)')
 ]
 
 imported_modules = {}
