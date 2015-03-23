@@ -66,6 +66,7 @@ def send_message(message='Произошла ошибка. Код ошибки: 
     """ Отправляет сообщение и вложения к нему
 
 
+    :rtype : dict
     :param message: текст сообщения
     :param attachments: список вложений
     :param type: тип получателя сообщения (user/chat)
@@ -95,3 +96,22 @@ def vk_method(method, values):
     """
     response = vk.method(method, values)
     return response
+
+
+def fast_send_message(message, text, attachments):
+    """ Быстро отправить сообщение в беседу или чат, в зависимости
+        от параметра 'message'
+
+
+    :param message: словарь сообщения, возвращаемый get_message
+    :param text: текст для отправки
+    :param attachments: вложения для отправки
+    :return: результат отправки сообщения
+    """
+    return send_message(
+        message=text,
+        attachments=attachments,
+        type=message['type'],
+        send_to=message['sender_id'] if message['type'] == 'user'
+                else message['chat']
+    )
