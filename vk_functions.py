@@ -1,7 +1,8 @@
-from vk_api import VkApi
+import vk_api
+from time import sleep
 from config import VK_LOGIN, VK_PASSWORD
 
-vk = VkApi(login=VK_LOGIN, password=VK_PASSWORD)  # Authorization in VK
+vk = vk_api.VkApi(login=VK_LOGIN, password=VK_PASSWORD)  # Authorization in VK
 
 
 def get_message(last_message_id=0, specify_dialog=False,
@@ -77,12 +78,25 @@ def send_message(message='Произошла ошибка. Код ошибки: 
         'message': message,
         'attachment': ','.join(attachments)
     }
+
+    error_values = {
+        'message': 'Увы, у нас возникли проблемы. Попробуйте другую команду.'
+    }
+
     if type == 'chat':
         values.update({'chat_id': send_to})
+        error_values.update({'chat_id': send_to})
     else:
         values.update({'user_id': send_to})
-
-    response = vk_method('messages.send', values)
+        error_values.update({'user_id': send_to})
+    try:
+        response = vk_method('messages.send', values)
+    except vk_api.ApiError as error:
+        response = vk_method('messages.send', error_values)
+        return None
+    except vk_api.Captcha:
+        print("Появилась каптча")
+        return None
     return response
 
 
