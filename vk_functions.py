@@ -98,7 +98,7 @@ def vk_method(method, values):
     return response
 
 
-def fast_send_message(message, text, attachments):
+def fast_send_message(message, text, attachments = []):
     """ Быстро отправить сообщение в беседу или чат, в зависимости
         от параметра 'message'
 

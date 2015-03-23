@@ -1,13 +1,7 @@
-from vk_functions import send_message, vk_method
+from vk_functions import fast_send_message, vk_method
 
 def get(message):
-    send_message(
-        message='Сейчас лайкну',
-        attachments=[],
-        type=message['type'],
-        send_to=message['sender_id'] if message['type'] == 'user'
-                else message['chat']
-    )
+    fast_send_message(message=message, text='Сейчас лайкну')
     response = vk_method('users.get', {
         'user_ids': message['sender_id'],
         'fields': 'photo_id'
