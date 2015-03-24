@@ -7,7 +7,8 @@ modules = [
     ('test', '!(тест|test)'),
     ('like', 'лайк(ни)? (мне|на)? (аву|фотографию|аватарку)'),
     ('wiki', '(ч|к)то так(ой|ая|ое|ие) (.+)\??'),
-    ('timenow', 'время')
+    ('timenow', 'время'),
+    ('staticcmds', '')
 ]
 
 imported_modules = {}
@@ -49,7 +50,9 @@ def loop():
 def parse_message(message):
     for parsing_module in imported_modules:
         if imported_modules[parsing_module]['regexp'].match(message['text']):
-            return imported_modules[parsing_module]['object'].get(message)
+            answer = imported_modules[parsing_module]['object'].get(message)
+            if answer is not None:
+                return answer
     else:
         return None
 
