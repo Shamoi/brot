@@ -20,10 +20,10 @@ def get(message):
         adding_command = expression.search(message['text'])
         if adding_command:
             static_cmds.set(
-                adding_command.group(1).lower(),
+                prepare_command(adding_command.group(1).lower()),
                 json.dumps(
                     {
-                        'text': prepare_command(adding_command.group(2)),
+                        'text': adding_command.group(2),
                         'attachments': message['attachments']
                     })
             )
@@ -35,5 +35,5 @@ def get(message):
 
 def prepare_command(command):
     for sym in delete_symbols:
-        command.replace(sym, '')
+        command = command.replace(sym, '')
     return command
