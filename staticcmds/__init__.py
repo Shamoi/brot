@@ -20,7 +20,7 @@ def get(message):
                 {
                     'text': adding_command.group(2),
                     'attachments': message['attachments']
-                })
+                }
             )
             return {'text': 'Команда "{}" добавлена'.format(adding_command.group(1)),
                     'attachments': []}
