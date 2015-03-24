@@ -5,8 +5,11 @@ import json
 static_cmds = redis.StrictRedis(host='localhost', port=6379, db=0)
 expression = re.compile('"(.+)" ?- ?"(.*)"', re.IGNORECASE)
 
+delete_symbols = ['?', '.', ',', '!']
+
+
 def get(message):
-    read_command = static_cmds.get(message['text'].lower())
+    read_command = static_cmds.get(prepare_command(message['text'].lower()))
     if read_command:
         read_command = json.loads(read_command.decode('utf-8'))
         return {
@@ -20,7 +23,7 @@ def get(message):
                 adding_command.group(1).lower(),
                 json.dumps(
                     {
-                        'text': adding_command.group(2),
+                        'text': prepare_command(adding_command.group(2)),
                         'attachments': message['attachments']
                     })
             )
@@ -29,3 +32,8 @@ def get(message):
         else:
             return None
 
+
+def prepare_command(command):
+    for sym in delete_symbols:
+        command.replace(sym, '')
+    return command
