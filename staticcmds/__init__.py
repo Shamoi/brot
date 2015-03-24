@@ -2,7 +2,7 @@ import re
 import redis
 
 static_cmds = redis.StrictRedis(host='localhost', port=6379, db=0)
-expression = re.compile('"(.+)" ?- ?"(.+)"', re.IGNORECASE)
+expression = re.compile('"(.+)" ?- ?"(.*)"', re.IGNORECASE)
 
 def get(message):
     read_command = static_cmds.get(message['text'].lower())
