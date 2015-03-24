@@ -1,5 +1,6 @@
 from loop import parse_message
 import re
+import pytest
 
 message = {
     'text': '!тест',
@@ -21,7 +22,8 @@ testing_commands = {
 }
 
 # Basic tests
-for command in testing_commands:
-    expression = re.compile(testing_commands[command])
-    message['text'] = command
-    assert expression.match(parse_message(message)['text'])
+def test_commands():
+    for command in testing_commands:
+        expression = re.compile(testing_commands[command])
+        message['text'] = command
+        assert expression.match(parse_message(message)['text'])
