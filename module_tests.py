@@ -34,6 +34,14 @@ class BrotModuleTests(unittest.TestCase):
         answer = parse_message(self.message)
         self.assertTrue(expression.search(answer['text']))
 
+    def test_time_module_accuracy(self):
+        expression = re.compile('Московское время - (\d+:\d+), воткинское - (\d+:\d+)')
+        self.message['text'] = 'время'
+        answer = parse_message(self.message)
+        self.assertEqual(expression.search(answer['text']).group(2),
+                         time.strftime('%H:%M'))
+
+
 
 if __name__ == '__main__':
     unittest.main()
