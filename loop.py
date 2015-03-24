@@ -5,7 +5,7 @@ last_message_id = get_message()['id']
 
 modules = [
     ('test', '!(тест|test)'),
-    ('like', 'лайк(ни)? (мне|на)? (аву|фотографию|аватарку)'),
+    ('like', 'лайк(ни)? ?(мне|на)? ?(аву|фотографию|аватарку)'),
     ('wiki', '(ч|к)то так(ой|ая|ое|ие) (.+)\??'),
     ('timenow', 'время'),
     ('staticcmds', '')
@@ -56,5 +56,5 @@ def parse_message(message):
     else:
         return None
 
-
-loop()  # Starting loop
+if __name__ == '__main__':
+    loop()  # Starting loop
