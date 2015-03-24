@@ -41,6 +41,27 @@ class BrotModuleTests(unittest.TestCase):
         self.assertEqual(expression.search(answer['text']).group(2),
                          time.strftime('%H:%M'))
 
+    def test_wiki_module(self):
+        expression = re.compile('(.+) — (.+)')
+        self.message['text'] = 'что такое гораздо?'
+        answer = parse_message(self.message)
+        self.assertTrue(expression.search(answer['text']))
+
+    def test_wiki_module_people(self):
+        expression = re.compile('(.+) — (.+)')
+        self.message['text'] = 'кто такая ким кардашьян'
+        answer = parse_message(self.message)
+        self.assertTrue(expression.search(answer['text']))
+
+    def test_staticcmds_module_new(self):
+        self.message['text'] = '"пинг" - "понг"'
+        answer = parse_message(self.message)
+        self.assertEqual(answer['text'], 'Команда "пинг" добавлена')
+
+    def test_staticcmds_module_read(self):
+        self.message['text'] = 'пинг'
+        answer = parse_message(self.message)
+        self.assertEqual(answer['text'], 'понг')
 
 
 if __name__ == '__main__':
